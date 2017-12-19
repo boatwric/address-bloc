@@ -23,4 +23,14 @@ class AddressBook
       
     end
 
+    def remove_entry(name, phone_number, email)
+        
+        entries.each do |entry| #go through each item in the entries array and compare to each entry
+            if name == entry.name #if the name entered equals name in entry.... shouldn't that be enough?
+                entries.remove(index, Entry.new(name, phone_number, email))#remove that entry from the list of entries
+            end
+         end
+    
+    end
+
 end
