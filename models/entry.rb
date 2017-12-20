@@ -1,4 +1,4 @@
-class Entry #stub= piece of code used to stand in for some other programming functionality
+class Entry
 
     attr_accessor :name, :phone_number, :email # These must be accessors since we mutate them
 
@@ -13,3 +13,5 @@ class Entry #stub= piece of code used to stand in for some other programming fun
     end
 
 end
+
+#stub= piece of code used to stand in for some other programming functionality
