@@ -15,10 +15,11 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5 - Exit"
+    puts "5- View Entry Number"
+    puts "6 - Exit"
     print "Enter your selection: "
 
-    #Retrieve user input from the command line using gets, which reads the next line from standard input. Standard 
+    #Retrieve user input from the command line using gets, which reads the next line from standard input. 
     selection = gets.to_i
 
     case selection #Baby's first Ruby case statement :D
@@ -42,8 +43,13 @@ class MenuController
             system "clear"
             read_csv #not yet defined, just a stub at the bottom
             main_menu
-    
+
         when 5
+            system "clear"
+            view_entry_number
+            #main_menu
+    
+        when 6
             puts "Good-bye!"
             exit(0) #I think you can pass anything in as an argument, but 0 signifies exiting without error
     
@@ -88,6 +94,16 @@ class MenuController
     end
 
     def read_csv
+    end
+
+    def view_entry_number
+        print "Enter entry number:"
+        selection = gets.to_i
+        if (1..address_book.entries.length).include?(selection)
+            puts book.entries[selection - 1]
+        else
+            puts "#{selection} is not a valid input"
+        end
     end
 
     def entry_submenu(entry)
