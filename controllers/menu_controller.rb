@@ -15,7 +15,7 @@ class MenuController
     puts "2 - Create an entry"
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
-    puts "5- View Entry Number"
+    puts "5 - View Entry Number"
     puts "6 - Exit"
     print "Enter your selection: "
 
@@ -46,8 +46,8 @@ class MenuController
 
         when 5
             system "clear"
-            view_entry_number
-            #main_menu
+            entry_n_submenu
+            main_menu
     
         when 6
             puts "Good-bye!"
@@ -96,14 +96,20 @@ class MenuController
     def read_csv
     end
 
-    def view_entry_number
+    def entry_n_submenu
         print "Enter entry number:"
-        selection = gets.to_i
-        if (1..address_book.entries.length).include?(selection)
-            puts book.entries[selection - 1]
+        selection = gets.chomp.to_i #takes number without white space
+        
+        if selection < @address_book.entries.count #could just as easily use length or size?
+            puts @address_book.entries[selection]
+            puts "Press enter to return to main menu"
+            gets.chomp
+            system "clear"
         else
             puts "#{selection} is not a valid input"
+            main_menu #Figured this is kinder than entry_n_submenu. If you have no entries, you get stuck here forever. 
         end
+
     end
 
     def entry_submenu(entry)
