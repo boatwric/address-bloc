@@ -1,4 +1,8 @@
+#http://ruby-doc.org/stdlib-2.0.0/libdoc/csv/rdoc/CSV.html#method-c-new
+#https://ruby-doc.org/core-2.2.2/Hash.html
+
 require_relative 'entry' #Tell Ruby to load the library named entry.rb relative to address_book.rb's file path using require_relative
+require "csv"
 
 class AddressBook
  
@@ -27,4 +31,14 @@ class AddressBook
         end
     end
 
+    def import_from_csv(file_name)
+        csv_text = File.read(file_name) #File.read is a command that just reads whatever file is passed in
+        csv = CSV.parse(csv_text, headers: true, skip_blanks: true) #csv is a object created by calling the CSV class and asking it to seperate (parse) the information by taking the text present in the csv_text variable and telling it that the first line will be used as headers and to skip over any blank content
+    
+        csv.each do |row| #each loop that....
+          row_hash = row.to_hash #takes each row and turns it to hash, a dictionary-like object that stores keys and their values....
+          add_entry(row_hash["name"], row_hash["phone_number"], row_hash["email"]) #then fills those rows with add_entry method above, taking each name/phone_number/email value and putting them into their respective rows
+        end   
+    end    
+        
 end
