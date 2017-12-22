@@ -33,7 +33,7 @@ class AddressBook
 
     def import_from_csv(file_name)
         csv_text = File.read(file_name) #File.read is a command that just reads whatever file is passed in
-        csv = CSV.parse(csv_text, headers: true, skip_blanks: true) #csv is a object created by calling the CSV class and asking it to seperate (parse) the information by taking the text present in the csv_text variable and telling it that the first line will be used as headers and to skip over any blank content
+        csv = CSV.parse(csv_text, headers: true, skip_blanks: true) #csv is a object created by calling the CSV class and asking it to seperate (parse) the information by taking the text present in the csv_text variable and telling it that the first line will be used as headers and to skip over any blank content. The header keeps the first line from showing up as one of the entires when the "imports the correct number of entries" spec test gets run
     
         csv.each do |row| #each loop that....
           row_hash = row.to_hash #takes each row and turns it to hash, a dictionary-like object that stores keys and their values....

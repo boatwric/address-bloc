@@ -89,5 +89,32 @@ RSpec.describe AddressBook do #describes the AddressBook class created in addres
             check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
         end
     end
+
+    describe "#import_from_csv_2" do
+
+        it "imports the correct number of entries" do
+            book.import_from_csv("entries_2.csv") #I presume import_from_csv is the function that needs building, and "entries.csv" is the file
+            book_size = book.entries.size 
+            expect(book_size).to eq 3 #gonna have three entries in this file
+        end
+
+        it "imports the 1st entry" do
+            book.import_from_csv("entries_2.csv")
+            entry_one = book.entries[0]
+            check_entry(entry_one, "Chris", "555-555-3217", "Chris@somemail.com")
+        end
+    
+        it "imports the 2nd entry" do
+            book.import_from_csv("entries_2.csv")
+            entry_two = book.entries[1]
+            check_entry(entry_two, "Diane", "555-555-0093", "Diane@somemail.com")
+        end
+          
+        it "imports the 3rd entry" do
+            book.import_from_csv("entries_2.csv")
+            entry_three = book.entries[2]
+            check_entry(entry_three, "Ennui", "Doggies don't have phones", "Doggies don't have email")
+        end
+    end
     
 end
