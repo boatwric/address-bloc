@@ -34,7 +34,7 @@ class AddressBook
 
     def import_from_csv(file_name)
         csv_text = File.read(file_name) #File.read is a command that just reads whatever file is passed in
-        csv = CSV.parse(csv_text, headers: true, skip_blanks: true) #csv is a object created by calling the CSV class and asking it to seperate (parse) the information by taking the text present in the csv_text variable and telling it that the first line will be used as headers and to skip over any blank content. The header keeps the first line from showing up as one of the entires when the "imports the correct number of entries" spec test gets run
+        csv = CSV.parse(csv_text, headers: true, skip_blanks: true) #csv is a object created by calling the CSV class and asking it to seperate (parse) the information by taking the text present in the csv_text variable and telling it that the first line will be used as headers and to skip over any blank content. The header keeps the first line from showing up as one of the entries when the "imports the correct number of entries" spec test gets run
     
         csv.each do |row| #each loop that....
           row_hash = row.to_hash #takes each row and turns it to hash, a dictionary-like object that stores keys and their values....
@@ -42,8 +42,7 @@ class AddressBook
         end   
     end
     
-    # Search AddressBook for a specific entry by name, using binary (divide and conquer) algorithmic pattern
-    def binary_search(name)
+    def binary_search(name) # Search AddressBook for a specific entry by name, using binary (divide and conquer) algorithmic pattern. This pattern is very efficient for sorted arrays- basically you chop off half the array with every iteration.
         
         #first we establish the length of the array, thinking of it as a left to right list
 
@@ -58,7 +57,7 @@ class AddressBook
             if name == mid_name
               return entries[mid] #if you happen to land on the right index, stop right there
             elsif name < mid_name 
-              upper = mid - 1 #if the middle index is alphabetically AFTER the name you're looking for, you need to go DOWN to the list and try again
+              upper = mid - 1 #if the middle index is alphabetically AFTER the name you're looking for, you need to go DOWN to the list and try again.
             elsif name > mid_name
               lower = mid + 1 #if the middle index is alphabetically BEFORE the name you're looking for, you need to go UP to the list and try again
             end
@@ -66,7 +65,23 @@ class AddressBook
         end
 
         return nil #if all the dividing and conquering finds nothing, return nil   
+    end
 
+    def iterative_search(name)
+        num = 0 
+        
+        while num < entries.length #got this wrong at first, set to <= instead of <
+            
+            if name == entries[num].name
+                return entries[num]
+            else
+                num += 1
+            end
+        
+        end
+        
+        return nil
+    
     end
         
 end
