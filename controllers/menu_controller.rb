@@ -20,7 +20,9 @@ class MenuController
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
     puts "5 - View Entry Number"
-    puts "6 - Exit"
+    puts "6 - Bomb this shit!"
+    puts "7 - Exit"
+    
     print "Enter your selection: "
 
     #Retrieve user input from the command line using gets, which reads the next line from standard input. 
@@ -53,7 +55,12 @@ class MenuController
             entry_n_submenu
             main_menu
     
-        when 6
+        when 6 
+            system "clear"
+            nuke
+            main_menu
+
+        when 7
             puts "Good-bye!"
             exit(0) #I think you can pass anything in as an argument, but 0 signifies exiting without error
     
@@ -208,23 +215,47 @@ class MenuController
     
         #specific actions based on user input
         case selection
-          when "d"
-            system "clear"
-            delete_entry(entry) #calls delete entry method
-            main_menu
-          when "e"
-            edit_entry(entry) #calls edit entry method
-            system "clear"
-            main_menu
-          when "m" 
-            system "clear"
-            main_menu #returns to main menu
-          else
-            system "clear"
-            puts "#{selection} is not a valid input"
-            puts entry.to_s 
-            search_submenu(entry) #ask for entry again using search_submenu method
-        end
+            when "d"
+                system "clear"
+                delete_entry(entry) #calls delete entry method
+                main_menu
+            when "e"
+                edit_entry(entry) #calls edit entry method
+                system "clear"
+                main_menu
+            when "m" 
+                system "clear"
+                main_menu #returns to main menu
+            else
+                system "clear"
+                puts "#{selection} is not a valid input"
+                puts entry.to_s 
+                search_submenu(entry) #ask for entry again using search_submenu method
+            end
+    end
+
+    def nuke
+        
+        puts "You sure you wanna kill all these jerks? Enter 'y' or 'n'..."
+            
+        selection = gets.chomp
+
+        case selection
+            when "y"
+                system "clear"
+                initialize
+                #address_book.entries.clear also works
+                puts "Those guys sucked anyway."
+                main_menu
+            when "n"
+                system "clear"
+                puts "Oh, thank god. One of them's my DAD!"
+                main_menu
+            else
+                system "clear"
+                puts "You don't know what you want. Eff off."
+                main_menu
+            end
     end
 
 end
